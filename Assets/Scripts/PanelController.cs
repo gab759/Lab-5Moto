@@ -1,33 +1,74 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using Cinemachine;
 
 public class PanelController : MonoBehaviour
 {
-    public GameObject panel; 
-    public Button activateButton; 
-    public Button deactivateButton;
-    public Button exitButton;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private SoundConfig sfx;
+    [SerializeField] private Fade fade;
+    public GameObject panel;
+    public GameObject imagenGame;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
     void Start()
     {
         panel.SetActive(false);
-        activateButton.onClick.AddListener(ActivatePanel);
-        deactivateButton.onClick.AddListener(DeactivatePanel);
-        exitButton.onClick.AddListener(ExitApplication);
+        imagenGame.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = sfx.SoundClip;
     }
 
     public void ActivatePanel()
     {
-        panel.SetActive(true); 
+        panel.SetActive(true);
+        audioSource.Play();
+        fade.CallComplexFadeIn();
+        if (virtualCamera != null)
+        {
+            RotationCamera(-90f, 0f);
+        }
+    }
+    public void ActivateImage()
+    {
+        imagenGame.SetActive(true);
+        audioSource.Play();
+        fade.CallComplexFadeIn();
+        if (virtualCamera != null)
+        {
+            RotationCamera(-29.88f, -90f);
+        }
+    }
+    public void DesactivateImage()
+    {
+        imagenGame.SetActive(false);
+        audioSource.Play();
+        fade.CallComplexFadeIn();
+        if (virtualCamera != null)
+        {
+            RotationCamera(+29.88f, +90f);
+        }
     }
 
-    public void DeactivatePanel()
+    public void DesactivatePanel()
     {
-        panel.SetActive(false); 
+        panel.SetActive(false);
+        audioSource.Play();
+        fade.CallComplexFadeIn();
+        if (virtualCamera != null)
+        {
+            RotationCamera(90f, 0f);
+        }
     }
     public void ExitApplication()
     {
-        Application.Quit(); 
+        audioSource.Play();
+        Application.Quit();  
+    }
+    void RotationCamera(float valueX, float valueY)
+    {
+        Vector3 currentRotation = virtualCamera.transform.rotation.eulerAngles;
+        Quaternion newRotation = Quaternion.Euler(currentRotation.x + valueX, currentRotation.y + valueY, currentRotation.z);
+        virtualCamera.transform.rotation = newRotation;
     }
 }
