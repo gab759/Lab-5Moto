@@ -2812,16 +2812,16 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1027171178}
   m_Direction: 0
   m_MinValue: 0.0001
-  m_MaxValue: 3
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1855161383}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioController, Assembly-CSharp
-        m_MethodName: SetVolumenMusic
-        m_Mode: 1
+        m_MethodName: SetMusicVolume
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3172,16 +3172,16 @@ MonoBehaviour:
   m_HandleRect: {fileID: 372487025}
   m_Direction: 0
   m_MinValue: 0.0001
-  m_MaxValue: 3
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1855161383}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioController, Assembly-CSharp
-        m_MethodName: SetVolumenMaster
-        m_Mode: 1
+        m_MethodName: SetMasterVolume
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3274,16 +3274,16 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1082001351}
   m_Direction: 0
   m_MinValue: 0.0001
-  m_MaxValue: 3
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1855161383}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioController, Assembly-CSharp
-        m_MethodName: SetVolumenSfx
-        m_Mode: 1
+        m_MethodName: SetSFXVolume
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3479,6 +3479,57 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 1, y: -1, z: 0}
+--- !u!1 &1761857426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1761857428}
+  - component: {fileID: 1761857427}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1761857427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761857426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd94785f8ee9b54eafd575ceee84e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _compAudioMixer: {fileID: 24100000, guid: 0862f4fdfa76ddb4abc63cd992e871c8, type: 2}
+  sliderMaster: {fileID: 1662962561}
+  sliderMusic: {fileID: 1399393085}
+  sliderSfx: {fileID: 1676443654}
+  masterVolumeConfig: {fileID: 11400000, guid: 889248f6965f22747ba998b66108e075, type: 2}
+  musicVolumeConfig: {fileID: 11400000, guid: 17c66e5920527e14da67eacee041acdc, type: 2}
+  sfxVolumeConfig: {fileID: 11400000, guid: ee36d4d5557d2894bbd6cc378e2f616e, type: 2}
+--- !u!4 &1761857428
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761857426}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 326.63858, y: 165.9762, z: -194.43985}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1764142655
 GameObject:
   m_ObjectHideFlags: 0
@@ -3794,7 +3845,6 @@ GameObject:
   - component: {fileID: 1855161386}
   - component: {fileID: 1855161385}
   - component: {fileID: 1855161384}
-  - component: {fileID: 1855161383}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3828,22 +3878,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1855161383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855161381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fd94785f8ee9b54eafd575ceee84e69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _compAudioMixer: {fileID: 24100000, guid: 0862f4fdfa76ddb4abc63cd992e871c8, type: 2}
-  sliderMaster: {fileID: 1662962561}
-  sliderMusic: {fileID: 1399393085}
-  sliderSfx: {fileID: 1676443654}
 --- !u!114 &1855161384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4428,3 +4462,4 @@ SceneRoots:
   - {fileID: 594983965}
   - {fileID: 1266199463}
   - {fileID: 545242857}
+  - {fileID: 1761857428}

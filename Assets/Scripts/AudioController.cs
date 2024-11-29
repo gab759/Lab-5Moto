@@ -10,19 +10,34 @@ public class AudioController : MonoBehaviour
     [SerializeField] private Slider sliderMusic;
     [SerializeField] private Slider sliderSfx;
 
-    public void SetVolumenMaster()
+    [SerializeField] private VolumeConfig masterVolumeConfig;
+    [SerializeField] private VolumeConfig musicVolumeConfig;
+    [SerializeField] private VolumeConfig sfxVolumeConfig;
+    void Start()
     {
-        float volumen = sliderMaster.value;
-        _compAudioMixer.SetFloat("Master", Mathf.Log10(volumen) * 20);
+        sliderMaster.value = masterVolumeConfig.volume;
+        sliderMusic.value = musicVolumeConfig.volume;
+        sliderSfx.value = sfxVolumeConfig.volume;
+
+        sliderMaster.onValueChanged.AddListener(SetMasterVolume);
+        sliderMusic.onValueChanged.AddListener(SetMusicVolume);
+        sliderSfx.onValueChanged.AddListener(SetSFXVolume);
     }
-    public void SetVolumenMusic()
+    public void SetMasterVolume(float value)
     {
-        float volumen = sliderMusic.value;
-        _compAudioMixer.SetFloat("Music", Mathf.Log10(volumen) * 20);
+        masterVolumeConfig.volume = Mathf.Clamp(value, 0f, 1f);
+        _compAudioMixer.SetFloat("Master", Mathf.Log10(value) * 20);
     }
-    public void SetVolumenSfx()
+
+    public void SetMusicVolume(float value)
     {
-        float volumen = sliderSfx.value;
-        _compAudioMixer.SetFloat("SFX", Mathf.Log10(volumen) * 20);
+        musicVolumeConfig.volume = Mathf.Clamp(value, 0f, 1f);
+        _compAudioMixer.SetFloat("Music", Mathf.Log10(value) * 20);
+    }
+
+    public void SetSFXVolume(float value)
+    {
+        sfxVolumeConfig.volume = Mathf.Clamp(value, 0f, 1f);
+        _compAudioMixer.SetFloat("SFX", Mathf.Log10(value) * 20);
     }
 }
